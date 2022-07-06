@@ -11,7 +11,7 @@ const Index = () => {
                 Escribí la URL en la caja de abajo y dale a generar. Una vez que ingreses al link, dejará de funcionar
                 😎👌
             </p>
-            <Input />
+            <Input/>
         </div>
     );
 }

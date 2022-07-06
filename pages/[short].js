@@ -4,20 +4,15 @@ import Router from "next/router";
 
 export const getServerSideProps = async (context) => {
     try {
-        const res = await axios.get(`http://www.randomnumberapi.com/api/v1.0/random?min=0&max=1&count=1`);
-
-        if(!res.data[0]) {
-            throw {};
-        }
+        const res = await axios.get(`${process.env.BACKEND_PROTO}://${process.env.BACKEND_HOST}:${process.env.BACKEND_PORT}${context.req.url}`);
 
         return {
             redirect: {
                 permanent: false,
-                destination: "https://nostalgia.ar"
+                destination: res.data.url
             }
         }
     } catch (error) {
-        console.log(error);
         context.res.statusCode = 404;
 
         return {

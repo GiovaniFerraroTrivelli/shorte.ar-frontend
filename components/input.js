@@ -1,5 +1,6 @@
 import {useState} from "react";
 import LoadingSpinner from "./loading-spinner";
+import axios from "axios";
 
 const Input = () => {
     const [processing, setProcessing] = useState(false);
@@ -8,15 +9,23 @@ const Input = () => {
     const [validUrl, setValidUrl] = useState(false);
     const [copied, setCopied] = useState(false);
 
-    const generate = () => {
-        setProcessing(true);
+    const generate = async () => {
+        try {
+            setProcessing(true);
 
-        setTimeout(() => {
-            setGeneratedUrl("https://shorte.ar/2kd")
+            axios.post(`/api/create`, {
+                url: inputUrl
+            }).then(res => {
+                setGeneratedUrl(`${process.env.NEXT_PUBLIC_APP_PROTO}://${process.env.NEXT_PUBLIC_APP_DOMAIN}/${res.data}`);
+            });
+        } catch (error) {
+            console.log('Ha ocurrido un error');
+        }
+        finally {
             setProcessing(null);
             setInputUrl("");
             setValidUrl(false);
-        }, 2000);
+        }
     }
 
     const onInputChange = (value) => {
