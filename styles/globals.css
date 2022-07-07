@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    background: linear-gradient(to right top, #0f172a 0%, #151f39 100%);
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(to right top, #0f172a 0%, #151f39 100%);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background: linear-gradient(to right top, #eaeaea, #fff);
+    }
 }
